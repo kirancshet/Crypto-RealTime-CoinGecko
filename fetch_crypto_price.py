@@ -62,7 +62,7 @@ class CryptoPrice:
 
         data = {}
         data['ids'] = ",".join(token_list)
-        data['vs_currencies'] = self.currency
+        data['vs_currencies'] = self.currency #Supports comma seperated multiple currencies
         #data['x_cg_pro_api_key'] = settings.API_KEY  #applicable for Premium Account
 
         response = requests.get(url, headers=header, params=data)
@@ -79,16 +79,16 @@ class CryptoPrice:
 
 
 def main():
-    obj = CryptoPrice()
+    obj = CryptoPrice('usd')
 
     token = 'bitcoin'
     price = obj.get_current_price(token)
     print(price)
 
-    #token_list = ['bitcoin','ethereum', 'tether', 'usd-coin', 'dogecoin']
-    #crypto_price = obj.get_current_price_multiple(token_list)
+    token_list = ['bitcoin','ethereum', 'tether', 'usd-coin', 'dogecoin']
+    crypto_price = obj.get_current_price_multiple(token_list)
 
-    #print(crypto_price)
+    print(crypto_price)
    
     
 if __name__ == '__main__':
